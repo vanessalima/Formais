@@ -1,0 +1,6 @@
+enum X, Y
+sequence point = { 0,0 }
+point[X] = 3
+point[Y] = 4
+
+printf(1, "Valor da Sequencia %d %d\n", point)

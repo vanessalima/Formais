@@ -1,0 +1,6 @@
+sequence s1 = {"aa", 454, $}
+atom a1 = 1
+atom a2 = 2
+atom a3 = 3
+sequence s = {a1, a2, {a3, a3, a3}, s1, {5, {6}}}
+--? s

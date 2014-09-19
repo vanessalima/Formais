@@ -1,0 +1,12 @@
+procedure proc(atom x)
+	x = 1
+end procedure
+proc(5)
+atom a = 10
+atom b = 12
+while(a>1) do
+	if (b>10) then
+		b =2
+	end if
+	a =  a-1
+end while

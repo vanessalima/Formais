@@ -1,0 +1,9 @@
+procedure main()
+	x := 10;
+	write("x=", x);
+	until (x<) do{
+		
+		write("x=", x);
+		x := x + 1
+	}
+end

@@ -1,0 +1,6 @@
+atom x = 0
+loop do
+	printf(1, "Hello, I am a debug message %d \n",x)
+	x = x +1
+	x = 100
+end loop

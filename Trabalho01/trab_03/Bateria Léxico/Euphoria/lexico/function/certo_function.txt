@@ -1,0 +1,5 @@
+function callname(sequence name) 
+	sequence fred 
+	fred = "Hi, Fred!"  
+	return name
+end function

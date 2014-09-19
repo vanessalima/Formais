@@ -1,0 +1,4 @@
+procedure main()
+	str := 'Hello World!
+	write(str)
+end

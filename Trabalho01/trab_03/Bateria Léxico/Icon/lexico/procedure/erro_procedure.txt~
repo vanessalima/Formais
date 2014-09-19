@@ -1,0 +1,6 @@
+procedure teste(a,)
+	write(a)
+end
+procedure main()
+	teste(5)
+end

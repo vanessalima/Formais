@@ -1,0 +1,5 @@
+integer EssaVariavelTemMaisDeTrintaCaracteres
+
+EssaVariavelTemMaisDeTrintaCaracteres = 1000
+
+printf(1, "Valor de variavel %f\n", EssaVariavelTemMaisDeTrintaCaracteres)

@@ -1,0 +1,7 @@
+function DigaOi()
+   puts(1, "Oi Professora")
+   return 1
+end function
+
+-- Chama a função acima
+DigaOi()

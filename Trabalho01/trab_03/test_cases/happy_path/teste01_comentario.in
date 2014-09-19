@@ -1,0 +1,8 @@
+-- Testando comentario.
+-- Testando comentário com acentos e alguns caracteres especiais áéíóúç~`!@#$%^&*()-+=.
+
+puts(1, "Testando a Meuphoria!\n") -- testando comentário após código
+
+/* testando um comentário de bloco
+pra ver se o compilador pode
+ignorar tudo isso sem problemas*/

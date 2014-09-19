@@ -1,0 +1,14 @@
+procedure proc(x)
+	x := 1
+end
+procedure main()
+	x := 5
+	proc(x)
+	y := 0
+	write("x=", x)
+	case x of{
+		0 : y := 0
+		2: y := 0
+		5: y := 0
+	}
+end

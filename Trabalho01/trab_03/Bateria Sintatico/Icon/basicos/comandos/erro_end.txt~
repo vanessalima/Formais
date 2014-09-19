@@ -1,0 +1,14 @@
+procedure proc(x)
+x := 1
+end
+procedure main()
+	x := 5;
+	a := 10;
+	b := 11;
+	write("Valor de B: ", b)
+	while a>1 do{
+		if b>10 then{
+			b := 2;
+		};
+		a :=  a - 1;
+	}

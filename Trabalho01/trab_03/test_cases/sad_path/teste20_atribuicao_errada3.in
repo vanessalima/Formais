@@ -1,0 +1,9 @@
+integer tempo, distancia
+sequence nome
+
+tempo   = 100        	  	-- Setar um integer
+tempo   = 101			-- Tentar substituir valor
+distancia = 1000.0    		-- Setar um ponto flutuante
+nome    = "Vanessa    		-- Setar uma String
+constant MAX = 100    		-- Setar uma constante
+enum ONE, TWO, THREE, FOUR 	-- Enumerar

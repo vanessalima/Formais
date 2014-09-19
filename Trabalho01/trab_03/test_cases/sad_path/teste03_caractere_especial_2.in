@@ -1,0 +1,5 @@
+integer t&mpo
+
+t&mpo = 1000
+
+printf(1, "Valor de t&mpo %f\n", t&mpo)

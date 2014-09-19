@@ -1,0 +1,10 @@
+function callname(sequence name,) 
+	sequence fred 
+	fred = "Hi, Fred!" 
+	puts (1,fred & '\n') 
+	return name
+end function
+sequence a,b
+b = "OLA"
+a = callname(b)
+puts(1,a & '\n')

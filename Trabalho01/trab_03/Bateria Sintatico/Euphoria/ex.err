@@ -1,0 +1,15 @@
+/home/leandro/Documentos/PAE/Bateria Sintatico/Euphoria/básicos/declarações/erro_decl_variavel1.txt:4
+<0076>:: expected to see an assignment after 'b', such as =, +=, -=, *=, /= or &=
+atom a b, c
+        ^
+
+
+--- Defined Words ---
+EU4
+EU4_0
+EU4_0_5
+CONSOLE
+UNIX
+LINUX
+EUI
+-------------------

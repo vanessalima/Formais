@@ -1,0 +1,4 @@
+procedure main()
+writes("hello,"); 
+write(" world")
+end

@@ -1,0 +1,6 @@
+procedure DigaOi(sequence nome,atom  idade)
+   printf(1, "%s tem %d anos.", {nome, idade})
+end procedure
+
+-- chama a procedure definida em cima.
+DigaOi("zara", 8)

@@ -1,0 +1,20 @@
+integer a = 10
+integer b = 20
+integer c = 0
+
+c = a + b
+printf(1, "c = a + b = %d\n", c )
+
+c += a 
+printf(1, "c += a = %d\n", c )
+
+c -= a 
+printf(1, "c -= a = %d\n", c )
+
+c *= a 
+printf(1, "c *= a = %d\n", c )
+
+a = 10
+c = 30
+c /= a 
+printf(1, "c /= a = %d\n", c )

@@ -1,0 +1,10 @@
+integer a = 1
+integer b = 0
+integer c = 1
+
+printf(1, "a and b = %d\n", (a and b) )
+printf(1, "a or b = %d\n", (a or b) )
+printf(1, "a xor b = %d\n", (a xor b) )
+printf(1, "a xor c = %d\n", (a xor c) )
+printf(1, "not(a) = %d\n", not(a) )
+printf(1, "not(b) = %d\n", not(b) )

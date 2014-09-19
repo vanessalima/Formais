@@ -1,0 +1,4 @@
+integer Na = 10
+for i = 0 to Na
+	--? i
+end for

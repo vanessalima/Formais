@@ -1,0 +1,5 @@
+procedure main()
+	every  do{
+		write(i)
+	}
+end

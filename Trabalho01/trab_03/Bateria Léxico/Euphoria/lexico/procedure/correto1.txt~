@@ -1,0 +1,5 @@
+procedure teste() 
+ sequence fred 
+ fred = "Bye, Fred!" 
+ puts (1,fred & '\n') 
+end procedure

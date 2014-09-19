@@ -1,0 +1,6 @@
+atom x = 5
+switch x do
+		case 0 then puts(1,"0 ")
+		case 2 then  puts(1,"2")
+		case 5 then puts(1,"5")
+end switch

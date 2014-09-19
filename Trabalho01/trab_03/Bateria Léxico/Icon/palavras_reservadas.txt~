@@ -1,0 +1,122 @@
+        &allocated : i1,i2,i3,i4    # accumulated bytes allocated
+                                    # (total,static,string,block)
+        &ascii : c                  # cset of ascii characters
+        &clock : s                  # current time of day
+        &collections : i1,i2,i3,i4  # collection count
+                                    # (total,static,string,block)
+        &cset : c                   # cset of all characters
+        &current : C                # current co-expression
+        &date : s                   # current date
+        &dateline : s               # current date and time
+        &digits : c                 # cset of digits 0-9
+        &dump : i                   # if non-zero, causes dump on termination
+        &e : r                      # base of natural logarithms, 2.71828...
+        &error : i                  # run-time error conversion control
+        &errornumber : i            # run-time error number
+        &errortext : s              # run-time error message text
+        &errorvalue : x             # run-time error offending value
+        &errout : f                 # standard error output file
+        &fail                       # fails
+        &features : s1,s2,...,sn    # implementation features
+        &file : s                   # current source code file name
+        &host : s                   # string identifying host computer
+        &input : f                  # standard input file
+        &lcase : c                  # cset of lower case letters a-z
+        &letters : c                # cset of all letters A-Za-z
+        &level : i                  # level of current procedure call
+        &line : i                   # current source code line number
+        &main : C                   # main co-expression
+        &null : n                   # the null value
+        &output : f                 # standard output file
+        &phi : r                    # The golden ratio, 1.61803...
+        &pi : r                     # The value of pi, 3.14159...
+        &pos : i                    # string scanning position
+        &progname : s               # file name of the executing program
+        &random : i                 # random number seed
+        &regions : i1,i2,i3         # current region size
+                                    # (static,string,block)
+        &source : C                 # activator of current co-expression
+        &storage : i1,i2,i3         # current bytes allocated
+                                    # (static,string,block)
+        &subject : s                # string scanning subject
+        &time : i                   # current run time in milliseconds
+        &trace : i                  # procedure tracing control
+        &ucase : c                  # cset of upper case letters A-Z
+        &version : s                # version of Icon
+break
+by
+case
+create
+default
+do
+else
+end
+every
+fail
+global
+if
+initial
+invocable
+link
+local
+next
+not
+of
+procedure
+record
+repeat
+return
+static
+suspend
+then
+to
+until
+while
+\b
+\d
+\e
+\f
+\l
+\n
+\r
+\t
+\v
+\'
+\"
+\\
+\ddd
+\xdd
+\^c
++
+-
+~
+=
+@
+^
+*
+?
+!
+/
+\
+.
+++
+--
+**
+||
+|||
+<
+<=
+>
+>=
+~=
+<<
+<<=
+==
+>>=
+>>
+~==
+===
+:=
+:=:
+<-
+->

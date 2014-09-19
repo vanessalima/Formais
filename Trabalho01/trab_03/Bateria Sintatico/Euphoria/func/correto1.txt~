@@ -1,0 +1,9 @@
+function max(atom a, atom b)
+    if a >= b then
+        return a
+    else
+        return b
+    end if
+end function
+atom a = max(5,10)
+? a

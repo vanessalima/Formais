@@ -1,0 +1,18 @@
+integer tempo, distancia
+sequence nome
+
+tempo   = 100        	  	-- Setar um integer
+tempo   = 101			-- Tentar substituir valor
+distancia = 1000.0    		-- Setar um ponto flutuante
+nome    = "Vanessa"    		-- Setar uma String
+constant MAX = 100    		-- Setar uma constante
+enum ONE, TWO, THREE, FOUR 	-- Enumerar
+
+
+printf(1, "Valor de tempo %d\n", tempo)
+printf(1, "Valor de miles %f\n", distancia )
+printf(1, "Valor de nome %s\n", {nome} )
+printf(1, "Valor de ONE %d\n", ONE )
+printf(1, "Valor de TWO %d\n", TWO )
+printf(1, "Valor de THREE %d\n", THREE )
+printf(1, "Valor de FOUR %d\n", FOUR )

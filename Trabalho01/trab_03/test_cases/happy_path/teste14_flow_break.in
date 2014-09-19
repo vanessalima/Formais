@@ -1,0 +1,20 @@
+integer a, b
+sequence s = {'E','u', 'p'}
+
+if s[1] = 'E' then
+   a = 3
+   if s[2] = 'u' then
+      b = 1
+      if s[3] = 'p' then
+         break 0
+      end if
+      a = 2
+   else
+      b = 4
+   end if
+else
+   a = 0
+   b = 0
+end if
+printf(1, "valor de a %d\n", a)
+printf(1, "valor de b %d\n", b)

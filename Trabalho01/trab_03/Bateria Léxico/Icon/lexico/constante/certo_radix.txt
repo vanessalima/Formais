@@ -1,0 +1,4 @@
+procedure main()
+	a1 := 2r11
+	write(a1)
+end

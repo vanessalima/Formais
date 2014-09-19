@@ -1,0 +1,7 @@
+procedure main()
+	a1 := 27e-5
+	a1 := 27E+555
+	27.
+	27.0
+	write(a1)
+end

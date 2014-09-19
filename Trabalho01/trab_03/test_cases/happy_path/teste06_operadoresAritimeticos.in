@@ -1,0 +1,15 @@
+integer a = 10
+integer b = 20
+
+printf(1, "a + b = %d\n" , (a + b) )
+printf(1, "a - b = %d\n" , (a - b) )
+printf(1, "a * b = %d\n" , (a * b) )
+printf(1, "b / a = %d\n" , (b / a) )
+printf(1, "+a   = %d\n" ,  (+a) )
+printf(1, "-a   = %d\n" ,  (-a) )
+printf(1, "a = b = %d\n", (a = b) )
+printf(1, "a != b = %d\n", (a != b) )
+printf(1, "a > b = %d\n", (a > b) )
+printf(1, "a < b = %d\n", (a < b) )
+printf(1, "b >= a = %d\n", (b >= a) )
+printf(1, "b <= a = %d\n", (b <= a) )

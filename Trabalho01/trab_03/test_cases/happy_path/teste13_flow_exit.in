@@ -1,0 +1,11 @@
+integer b
+
+for a = 1 to 16 do
+   printf(1, "valor de a: %d\n", a)
+   if a = 10 then
+      b = a
+      exit
+   end if
+end for
+
+printf(1, "valor de b vindo de a: %d\n", b)

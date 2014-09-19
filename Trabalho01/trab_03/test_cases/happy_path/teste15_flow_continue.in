@@ -1,0 +1,8 @@
+for a = 3 to 6 do
+   printf(1, "valor de a %d\n", a)
+   if a = 4 then
+      puts(1,"(2)\n")
+      continue
+   end if
+   printf(1, "valor de a %d\n", a*a) 
+end for

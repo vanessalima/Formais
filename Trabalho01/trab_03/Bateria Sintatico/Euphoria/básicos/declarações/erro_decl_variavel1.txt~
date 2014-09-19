@@ -1,0 +1,5 @@
+procedure proc(atom x)
+	x = 1
+end procedure
+atom a b, c
+proc(5)

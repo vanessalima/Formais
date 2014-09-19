@@ -1,0 +1,6 @@
+procedure teste(atom a,) 
+ sequence fred 
+ fred = "Bye, Fred!" 
+ puts (1,fred & '\n') 
+end procedure
+teste(5)

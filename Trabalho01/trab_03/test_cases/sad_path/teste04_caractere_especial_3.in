@@ -1,0 +1,5 @@
+integer teste%teste
+
+teste%teste = 1000
+
+printf(1, "Valor de teste %f\n", teste%teste)

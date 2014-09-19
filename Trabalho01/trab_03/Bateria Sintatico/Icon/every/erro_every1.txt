@@ -1,0 +1,5 @@
+procedure main()
+	every i := find(s1, s2){
+		write(i)
+	}
+end

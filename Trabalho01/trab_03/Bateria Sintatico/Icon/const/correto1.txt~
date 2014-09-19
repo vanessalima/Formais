@@ -1,0 +1,8 @@
+$define Limet 5000
+procedure proc(x)
+	x := 1
+end
+procedure main()
+	x := 5
+	proc(x)
+end

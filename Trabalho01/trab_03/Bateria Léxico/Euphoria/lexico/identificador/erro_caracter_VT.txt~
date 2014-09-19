@@ -1,0 +1,5 @@
+atom _ = 45
+? _
+--Caracter não permitido
+atom _| = 45
+? _|

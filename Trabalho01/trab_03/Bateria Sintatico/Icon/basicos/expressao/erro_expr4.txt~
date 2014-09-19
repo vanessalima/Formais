@@ -1,0 +1,9 @@
+procedure main()
+	x := 10;
+	write("x=", x);
+	1x := 45;
+	while (x>8) do{
+		x := (x*2+5);
+		write("x=", x);
+	}
+end

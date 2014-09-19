@@ -1,0 +1,8 @@
+procedure main()
+	_ := 'Hello World!'
+	_adsa
+	sdasd
+	aa5454
+	_454454
+	write(_)
+end

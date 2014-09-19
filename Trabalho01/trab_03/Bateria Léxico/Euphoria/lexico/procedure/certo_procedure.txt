@@ -1,0 +1,5 @@
+procedure teste(atom a) 
+ sequence fred 
+ fred = "Bye, Fred"  
+end procedure
+teste(5)

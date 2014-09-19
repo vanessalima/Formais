@@ -1,0 +1,6 @@
+procedure main()
+	a := ["Delphi", "Heracles"]
+	b := ["Delphi", "Heracles", "Claros"]
+	x := [a, b]
+	write(x[2][3])
+end

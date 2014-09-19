@@ -1,0 +1,88 @@
+and
+as
+break
+by
+case
+constant
+continue
+do
+else
+elsedef
+elsif
+elsifdef
+end
+entry
+enum
+exit
+export
+fallthru
+for
+function
+global
+goto
+if
+ifdef
+include
+label
+loop
+namespace
+not
+or
+override
+procedure
+public
+retry
+return
+routine
+switch
+then
+to
+type
+until
+while
+with
+without
+xor
+#
+,
+:
+(
+)
+[
+]
+{
+}
+*
++
+-
+/
+=
+&
+>
+<
+<=
+>=
+!=
+''
+""
+""" """
+\n	 newline
+\r	 carriage return
+\t	 tab
+\\	 backslash
+\"	 double quote
+\'	 single quote
+\0	 null
+\e	 escape
+\E	 escape
+\b/d..d/	 A binary coded value, the \b is followed by 1 or more binary digits. 
+\x/hh/	 A 2-hex-digit value, e.g. "\x5F" ==> {95}
+\u/hhhh/	 A 4-hex-digit value, e.g. "\u2A7C" ==> {10876}
+\U/hhhhhhhh/	 An 8-hex-digit value, e.g. "\U8123FEDC" ==> {2166619868}
+--
+/*
+*/
+.. slicing sequence
+atom_real "-253" .. "+253" | "-9.007e15" .. "+9.007e15"
+atom_integer "-21024+1" .. "+21024-1" | "-1.798e308+1" .. "+1.798e308-1"
+integer = "-230" .. "+230-1" | "-1_073_741_824" .. "+1_073_741_823"

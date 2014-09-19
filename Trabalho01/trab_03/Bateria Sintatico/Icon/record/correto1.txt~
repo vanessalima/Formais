@@ -1,0 +1,7 @@
+record complex (rpart, ipart)
+procedure main()
+	x := 5;
+	write(x)
+	origin := complex(0.0, 0.0);
+	write(origin.rpart)
+end

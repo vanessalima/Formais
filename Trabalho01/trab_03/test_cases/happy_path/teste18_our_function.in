@@ -1,0 +1,4 @@
+sequence nome
+integer idade
+
+nome, idade = "Vanessa", 10

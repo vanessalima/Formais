@@ -1,0 +1,4 @@
+integer N1 = 10
+for i = 0 to N1 do
+	--? i
+end for

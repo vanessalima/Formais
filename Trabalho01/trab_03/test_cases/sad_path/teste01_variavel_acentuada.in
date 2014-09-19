@@ -1,0 +1,5 @@
+integer distância
+
+distância = 1000
+
+printf(1, "Valor de distância %f\n", distância)

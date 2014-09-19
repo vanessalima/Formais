@@ -1,0 +1,7 @@
+atom i 
+i = 0 
+while i < 10 do 
+ printf (1,"The counter is %d\n",i) 
+ i += 1 
+end while 
+

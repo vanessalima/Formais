@@ -1,0 +1,4 @@
+atom x = 10
+while (x>) do
+	x=20
+end while

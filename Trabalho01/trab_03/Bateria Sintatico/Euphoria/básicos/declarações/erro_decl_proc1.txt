@@ -1,0 +1,4 @@
+procedure proc(x)
+	x = 1
+end procedure
+proc(5)

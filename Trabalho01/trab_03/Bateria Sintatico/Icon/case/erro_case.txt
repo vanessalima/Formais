@@ -1,0 +1,13 @@
+procedure proc(x)
+	x := 1
+end
+procedure main()
+	x := 5
+	proc(x)
+	write("x=", x)
+	case x {
+		0 : write(0)
+		2: write(2)
+		5: write("x-> ", x)
+	}
+end

@@ -1,0 +1,121 @@
+and
+as
+break
+by
+case
+constant
+continue
+do
+else
+elsedef
+elsif
+elsifdef
+end
+entry
+enum
+exit
+export
+fallthru
+for
+function
+global
+goto
+if
+ifdef
+include
+label
+loop
+namespace
+not
+or
+override
+procedure
+public
+retry
+return
+routine
+switch
+then
+to
+type
+until
+while
+with
+without
+xor
+profile
+profile_time
+trace
+batch
+type_check
+indirect_includes
+inline
+none
+resolution
+short_circuit
+override
+builtin_chosen
+Euphoria
+not_used
+no_value
+custom
+not_reached
+translator
+cmdline
+mixed_profile
+empty_case
+default_case
+default_arg_type
+deprecated
+all
+warning
+save
+restore
+strict
+# hexdecimal
+,
+: name spaces
+(
+)
+[
+]
+{
+}
+*
++
+-
+/
+=
+&
+>
+<
+<=
+>=
+!=
+''
+""
+""" """
+"\n"
+"\r"
+"\t"
+"\\"
+"\""
+"\'"
+"\0"
+"\e"
+"\E"
+"\b"
+"\x"
+"\u"
+"\U"
+--
+/*
+*/
+.. slicing sequence
+atom_real "-253" .. "+253" | "-9.007e15" .. "+9.007e15"
+atom_integer "-21024+1" .. "+21024-1" | "-1.798e308+1" .. "+1.798e308-1"
+integer = "-230" .. "+230-1" | "-1_073_741_824" .. "+1_073_741_823"
+0b binary
+0t octal
+0d decimal
+0x hexdecimal

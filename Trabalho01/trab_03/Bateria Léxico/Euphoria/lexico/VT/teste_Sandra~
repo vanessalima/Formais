@@ -1,0 +1,11 @@
+atom X,Y,B
+X = 10
+Y = 10
+B = 5
+function aa(atom b1)
+	b1 = 10
+	? b1
+	return 0
+end function
+aa(atom b)
+?

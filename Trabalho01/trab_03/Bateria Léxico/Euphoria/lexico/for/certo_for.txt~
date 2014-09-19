@@ -1,0 +1,3 @@
+for i = 1 to 10 do 
+ printf (1,"Valor %d ",i) 
+end for

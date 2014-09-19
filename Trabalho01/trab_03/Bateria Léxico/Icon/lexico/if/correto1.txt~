@@ -1,0 +1,8 @@
+atom a = 2
+if a=0 then
+	 puts(1,"Opcao um\n")
+elsif a=1 then
+	 puts(1,"Opcao dois\n") 
+else
+	 puts(1,"Hello World!\n")
+end if

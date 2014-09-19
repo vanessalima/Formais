@@ -1,0 +1,6 @@
+integer a = 10
+
+while a < 20
+   printf(1, "Valor de a : %d\n", a)
+   a = a + 1
+end while
