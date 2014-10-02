@@ -1,0 +1,278 @@
+/***********************************************************************
+            ANALISADOR LÉXICO E SINTÁTICO
+************************************************************************
+
+Integrantes: 
+  Carlos Rafael Barbosa Leite	7656596
+  Vanessa Apolinário Lima		7239256
+  Vitor Barbosa Novello			7656425 
+
+Documento:
+  Codigo fonte
+
+Nome:
+  Gramática AWK - Analisador Léxico e Sintático
+
+************************************************************************/
+
+/*****************************************
+                Opções
+*****************************************/
+options {
+  STATIC = false;
+  DEBUG_LOOKAHEAD = false;
+}
+
+/*****************************************
+    Inicialização do Analisador Léxico
+*****************************************/
+PARSER_BEGIN(AWK)
+
+/* AWK Parser */
+class AWK {
+
+  // Processa o código e gera a tabela de tokens
+  public void processa() throws ParseException, TokenMgrError{
+    Token t;
+    String nomeToken;
+    do {
+        // Pega o próximo token gerado pelo Léxico.
+        t = getNextToken();
+        // Pega o proximo token do tipo t.kind
+        nomeToken = tokenImage[t.kind];
+        // Seta a localização do token
+        String location = "@(" + t.beginLine + ", " + t.beginColumn + ")";
+        // Imprime as informações do token. Se for EOF não imprime image, pois ela não existe.
+        if(t.kind == EOF)
+            System.out.println(String.format("%-15s %-20s <EOL>", location, nomeToken));
+        else
+            System.out.println(String.format("%-15s %-20s %s", location, nomeToken, t.image));
+    } while (!(nomeToken.equals("<EOF>"))); // Termina o loop se EOF
+    System.out.println(String.format("%s", t.image));
+  }
+
+  /* Main entry point. */
+  public static void main(String args[]) {
+    try
+    {
+      // Define o analisador sintatico de acordo com a entrada do sistema
+      AWK analisadorSintatico = new AWK(System.in);
+      analisadorSintatico.javacc_input();
+      System.out.println("SUCESSO!");
+    }
+    catch(ParseException e)
+    {
+      System.out.println(e.getMessage());
+        System.out.println("Ocorreu uma excecao!");
+    }
+    catch(TokenMgrError e)
+    {
+        System.out.println(e.getMessage());
+        System.out.println("Existem erros no codigo! Por favor, verifica-los.");
+    }
+  }
+}
+PARSER_END(AWK)
+
+/*****************************************
+                SKIP
+*****************************************/
+SKIP : { " " | "\t" | "\r" | "\n" }
+
+/* Skip Comentários de linha e de bloco */
+SKIP : {
+  <COMENTARIO : "#" (~["\n","\r"])*  >
+}
+
+/*****************************************
+          PALAVRAS RERSERVADAS
+*****************************************/
+/* Control Statements */
+TOKEN : {
+    <IF : "if">
+  | <ELSE : "else">
+  | <WHILE : "while">
+  | <DO : "do">
+  | <FOR : "for">
+  | <BREAK : "break">
+  | <CONTINUE : "continue">
+  | <NEXT : "next">
+  | <DELETE : "delete">
+  | <EXIT : "exit">
+}
+
+/* I/O Statements */
+TOKEN : {
+    <GETLINE : "getline">
+  | <PRINT : "print">
+}
+
+/* Math Statements */
+TOKEN : {
+    <ATAN2 : "atan2">
+  | <RAND : "rand">
+  //|  continuar ????? 
+}
+
+/* String Statements */
+TOKEN : {
+    <ASSORT : "assort">
+  | <ASSORTL : "assortl">
+  //|  continuar ?????
+
+}
+
+/* Built-in */
+TOKEN : {
+    <BEGIN : "BEGIN">
+  | <END : "END">
+  | <ARGC : "ARGC">
+  | <ARGV : "ARGV">
+  // continuar?????
+}
+
+/*****************************************
+              SEPARADORES
+*****************************************/
+TOKEN : {  
+    <LBRACE: "{" >
+  | <RBRACE: "}" >
+  | <LBRACKET: "[" >
+  | <RBRACKET: "]" >
+  | <SEMICOLON: ";" >
+  | <COMMA: "," >
+  | <DOT: "." >
+  | <QUOTE: "\"">
+  | <#COLON : ":">
+}
+
+/*****************************************
+              OPERADORES
+*****************************************/
+TOKEN : {
+    <LPAREN: "(" >
+  | <RPAREN: ")" >
+  | <REFERENCE : "$">
+  | <CREMENT_OP : "++" | "--">
+  | <EXPONENTIATION : "^">
+  | <PLUS: "+" >
+  | <MINUS: "-" >
+  | <NEGATION : "!">
+  | <MULTIPLICATION: "*" >
+  | <DIVISION: "/" >
+  | <MODULUS : "%">
+  | <PIPED : "|">
+  | <PIPED_AND : "|&">
+  | <RELATIONAL_OP : ">" | "<" | "<=" | ">=" | "!=" | "==">
+  | <IN : "in">
+  | <AND : "&&">
+  | <OR : "||"> 
+  | <#QMARK : "?">
+  | <ASSIGNMENT_OP : "=" | "+=" | "-=" | "*=" | "/=" | "%=" | "^=">
+}
+
+/*****************************************
+              TERMINAIS
+*****************************************/
+TOKEN : {
+    < IDENTIFIER : ( ["a"-"z", "A"-"Z", "_"] ) ( ["a"-"z", "A"-"Z", "_"] | ["0"-"9"] )* > 
+  | < INTEGER : ( <PLUS> | <MINUS> )? ["0"-"9"] (["0"-"9"] | "_")* >
+  | < FLOAT   : <INTEGER> <DOT> ["0"-"9"] (["0"-"9"] | "_")* >
+  | < EXP     : (<INTEGER> | <FLOAT>) ("E" | "e") <INTEGER> >
+}
+
+
+TOKEN : {
+    < BIN_NUMBER : "0b" (["0", "1"])+(["0", "1", "_"])* >
+  | < OCT_NUMBER : "0t" (["0"-"7"])+(["0"-"7", "_"])* >
+  | < DEC_NUMBER : "0d" <INTEGER> >
+  | < HEX_NUMBER : "0x" (["0"-"9", "A"-"F"])+(["0"-"9", "A"-"F", "_"])* >
+}
+
+/*****************************************
+        MANIPULAÇÃO DE VARIAVEIS
+*****************************************/
+TOKEN : {
+  <STRING : (<QUOTE> (~["\""])* <QUOTE>) >
+}
+
+/*******************************************************
+                AWK SIMPLIFIED GRAMMAR
+*******************************************************/
+
+void javacc_input() :
+{}
+{
+    
+      ( Pattern() <LBRACE> Action() <RBRACE> )*
+      <EOF>
+}
+
+      void Pattern() :
+      {}
+      {
+        <BEGIN> | <END> | Expression() 
+      }
+
+      void Action() :
+      {}
+      {
+        <LBRACE> (Statement())* <RBRACE> | (Statement())*
+      }
+
+      void Statement() :
+      {}
+      {
+          Control_Statements()
+        | ( IO_Statements() | Math_Statements() | String_Statements() | Expression() ) <SEMICOLON>
+      }
+
+
+            void Control_Statements() :
+            {}
+            {
+              <BREAK> | <CONTINUE> | <NEXT> | 
+            }
+
+            void IO_Statements() :
+            {}
+            {
+              <PRINT> | <GETLINE>
+            }
+
+            void Math_Statements() :
+            {}
+            {
+              <ATAN2>
+            }
+
+            void String_Statements() :
+            {}
+            {
+              <ASSORT>
+            }
+
+/*****************************************
+        MANIPULAÇÃO DE VARIAVEIS
+*****************************************/
+void Array() :
+{}
+{
+  <IDENTIFIER> <LBRACKET> Expression() /*  */ <RBRACKET> 
+}
+
+/************************************************************
+                      EXPRESSÕES
+************************************************************/
+
+void Expression() :
+{}
+{
+  Expression00()
+}
+
+void Expression00() :
+{}
+{
+  <STRING> | (<LPAREN> Expression() <RPAREN>) | <IDENTIFIER>
+}
