@@ -111,15 +111,31 @@ TOKEN : {
 TOKEN : {
     <ATAN2 : "atan2">
   | <RAND : "rand">
-  //|  continuar ????? 
+  | <COS : "cos">
+  | <EXP : "exp">
+  | <INT : "int">
+  | <LOG : "log">
+  | <SIN : "sin">
+  | <SQRT : "sqrt">
+  | <SRAND : "srand">
 }
 
 /* String Statements */
 TOKEN : {
     <ASSORT : "assort">
-  | <ASSORTL : "assortl">
-  //|  continuar ?????
-
+  | <ASSORTI : "assorti">
+  | <GENSUB : "gensub">
+  | <GSUB : "gsub">
+  | <INDEX : "index">
+  | <LENGTH : "length">
+  | <MATCH : "match">
+  | <SPLIT : "split">
+  | <SPRINTF : "sprintf">
+  | <STRTONUM : "strtonum">
+  | <SUB : "sub">
+  | <SUBSTR : "substr">
+  | <TOLOWER : "tolower">
+  | <TOUPPER : "toupper">
 }
 
 /* Built-in */
@@ -128,7 +144,27 @@ TOKEN : {
   | <END : "END">
   | <ARGC : "ARGC">
   | <ARGV : "ARGV">
-  // continuar?????
+  | <BINMODE : "BINMODE">
+  | <CONVFMT : "CONVFMT">
+  | <ENVIRON : "ENVIRON">
+  | <ERRNO : "ERRNO">
+  | <FIELDWIDTHS : "FIELDWIDTHS">
+  | <FILENAME : "FILENAME">
+  | <FNR : "FNR">
+  | <FS : "FS">
+  | <IGNORECASE : "IGNORECASE">
+  | <LINT : "LINT">
+  | <NF : "NF">
+  | <NR : "NR">
+  | <OFMT : "OFMT">
+  | <ORS : "ORS">
+  | <PROCINFO : "PROCINFO">
+  | <RS : "RS">
+  | <RT : "RT">
+  | <RSTART : "RSTART">
+  | <RLENGTH : "RLENGTH">
+  | <SUBSEP : "SUBSEP">
+  | <TEXTDOMAIN : "TEXTDOMAIN">
 }
 
 /*****************************************
@@ -143,7 +179,7 @@ TOKEN : {
   | <COMMA: "," >
   | <DOT: "." >
   | <QUOTE: "\"">
-  | <#COLON : ":">
+  | <COLON : ":">
 }
 
 /*****************************************
@@ -161,13 +197,11 @@ TOKEN : {
   | <MULTIPLICATION: "*" >
   | <DIVISION: "/" >
   | <MODULUS : "%">
-  | <PIPED : "|">
-  | <PIPED_AND : "|&">
   | <RELATIONAL_OP : ">" | "<" | "<=" | ">=" | "!=" | "==">
   | <IN : "in">
   | <AND : "&&">
   | <OR : "||"> 
-  | <#QMARK : "?">
+  | <QMARK : "?">
   | <ASSIGNMENT_OP : "=" | "+=" | "-=" | "*=" | "/=" | "%=" | "^=">
 }
 
@@ -181,13 +215,6 @@ TOKEN : {
   | < EXP     : (<INTEGER> | <FLOAT>) ("E" | "e") <INTEGER> >
 }
 
-
-TOKEN : {
-    < BIN_NUMBER : "0b" (["0", "1"])+(["0", "1", "_"])* >
-  | < OCT_NUMBER : "0t" (["0"-"7"])+(["0"-"7", "_"])* >
-  | < DEC_NUMBER : "0d" <INTEGER> >
-  | < HEX_NUMBER : "0x" (["0"-"9", "A"-"F"])+(["0"-"9", "A"-"F", "_"])* >
-}
 
 /*****************************************
         MANIPULAÇÃO DE VARIAVEIS
