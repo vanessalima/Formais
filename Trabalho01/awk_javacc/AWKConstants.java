@@ -109,23 +109,21 @@ public interface AWKConstants {
   /** RegularExpression Id. */
   int IDENTIFIER = 54;
   /** RegularExpression Id. */
-  int CHAR = 55;
+  int INTEGER = 55;
   /** RegularExpression Id. */
-  int INTEGER = 56;
+  int FLOAT = 56;
   /** RegularExpression Id. */
-  int FLOAT = 57;
+  int EXP = 57;
   /** RegularExpression Id. */
-  int EXP = 58;
+  int BIN_NUMBER = 58;
   /** RegularExpression Id. */
-  int BIN_NUMBER = 59;
+  int OCT_NUMBER = 59;
   /** RegularExpression Id. */
-  int OCT_NUMBER = 60;
+  int DEC_NUMBER = 60;
   /** RegularExpression Id. */
-  int DEC_NUMBER = 61;
+  int HEX_NUMBER = 61;
   /** RegularExpression Id. */
-  int HEX_NUMBER = 62;
-  /** RegularExpression Id. */
-  int STRING = 63;
+  int STRING = 62;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -187,7 +185,6 @@ public interface AWKConstants {
     "\"?\"",
     "<ASSIGNMENT_OP>",
     "<IDENTIFIER>",
-    "<CHAR>",
     "<INTEGER>",
     "<FLOAT>",
     "<EXP>",
