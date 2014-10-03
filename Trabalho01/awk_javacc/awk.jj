@@ -92,6 +92,11 @@ SKIP : {
   <COMENTARIO : "#" (~["\n","\r"])* >
 }
 
+/*TOKEN :
+{
+  <EOL : "\n">
+}*/
+
 /*****************************************
           PALAVRAS RERSERVADAS
 *****************************************/
@@ -217,7 +222,7 @@ TOKEN : {
               TERMINAIS
 *****************************************/
 TOKEN : {
-    < IDENTIFIER : ( ~["0"-"9"] ["a"-"z", "A"-"Z", "_"] ) ( ["a"-"z", "A"-"Z", "_"] | ["0"-"9"] )* > 
+    < IDENTIFIER : ( ["a"-"z", "A"-"Z", "_"] ) ( ["a"-"z", "A"-"Z", "_"] | ["0"-"9"] )* > 
   | < INTEGER : ( <PLUS> | <MINUS> )? ["0"-"9"] (["0"-"9"] | "_")* >
   | < FLOAT   : <INTEGER> <DOT> ["0"-"9"] (["0"-"9"] | "_")* >
   | < NUM_EXP : (<INTEGER> | <FLOAT>) ("E" | "e") <INTEGER> >
@@ -239,7 +244,7 @@ void javacc_input() :
 {}
 {
     
-      ( Pattern() <LBRACE> Action() <RBRACE> )*
+      ( Pattern() <LBRACE> (Action())* <RBRACE> )*
       <EOF>
 }
 
@@ -252,53 +257,101 @@ void javacc_input() :
       void Action() :
       {}
       {
-        Statement02()// | (Statement())*
-      }
-
-      void Statement02() :
-      {}
-      {
-        (<LBRACE> (Statement())* <RBRACE>)+
+        (Statement())
       }
 
       void Statement() :
       {}
       {
-          Control_Statements()
-        | ( IO_Statements() | Math_Statements() | String_Statements() | 
-			(( <IDENTIFIER> | Array() ) Assignment() )) <SEMICOLON>
+        (
+             <LBRACE> Action() <RBRACE> | Control_Statements()
+            | ( IO_Statements() | Math_Statements() | String_Statements() | 
+    			(( <IDENTIFIER> | Array() ) Assignment() )) <SEMICOLON>
+        )
       }
 
 
             void Control_Statements() :
             {}
             {
-              (<BREAK> | <CONTINUE> | <NEXT>) <SEMICOLON> | If_Statement()
+              (<BREAK> | <CONTINUE> | <NEXT>) <SEMICOLON>
+              | If_Statement() | While_Statement() | For_Statement() 
+              | Delete_Statement() | Exit_Statement()
+              //| C2()
 
             }
 
-                  void If_Statement() :
+            void C2() :
+            {}
+            {
+              If_Statement() | While_Statement() | For_Statement() 
+            }
+
+                  void If_Statement() : // PROBLEMA ???
                   {}
                   {
-                      <IF> <LPAREN> Expression() <RPAREN> Action() (<ELSE> Action())?
+                      <IF> <LPAREN> Expression() <RPAREN> 
+                          <LBRACE> 
+                          (Statement())* 
+                          <RBRACE>
+                          ( <ELSE> <LBRACE> (Statement())* <RBRACE> )?
+                  }
+
+                  void While_Statement() : // PROBLEMA ???
+                  {}
+                  {
+                      <DO> Statement() <WHILE> <LPAREN> Expression() <RPAREN> <SEMICOLON>
+                    | <WHILE> <LPAREN> Expression() <RPAREN> 
+                              <LBRACE> (Statement())* <RBRACE>
+                  }
+
+                  void For_Statement() : // PROBLEMA ???
+                  {}
+                  {
+                    <FOR> <LPAREN> (  LOOKAHEAD(2)
+                                      ( Expression() <SEMICOLON> Expression() <SEMICOLON> Expression() )
+                                    | ( <IDENTIFIER> <IN> <IDENTIFIER> )
+                      )
+                    <RPAREN> 
+                    <LBRACE> (Statement())* <RBRACE>
+                  }
+
+                  void Delete_Statement() :
+                  {}
+                  {
+                    <DELETE> <IDENTIFIER> (Array())? <SEMICOLON>
+                  }
+
+                  void Exit_Statement() :
+                  {}
+                  {
+                    <EXIT> (Expression())? <SEMICOLON>
                   }
 
             void IO_Statements() :
             {}
             {
-              <PRINT> ( Expression() )? | <GETLINE>
+              <PRINT> ( Expression() (EXPR_LIST())? )? | <GETLINE> (Expression())?
             }
 
             void Math_Statements() :
             {}
             {
-              <ATAN2>
+                ( <ATAN2> <LPAREN> Expression() <COMMA> Expression() <RPAREN> )
+              | ( <RAND> <LPAREN> <RPAREN> )
+              | ( <SRAND> <LPAREN> (Expression())? <RPAREN> )
+              | ( ( <COS> | <EXP> | <INT> | <LOG> | <SIN> | <SQRT> ) <LPAREN> Expression() <RPAREN> )
             }
 
             void String_Statements() :
             {}
             {
-              <ASSORT>
+                ( ( <ASSORT> | <ASSORTI>) <LPAREN> Expression() (<COMMA> Expression())? <RPAREN> )
+              | ( ( <GSUB> | <MATCH> | <SPLIT> | <SUB> | <SUBSTR> ) <LPAREN> Expression() <COMMA> Expression() (<COMMA> Expression())? <RPAREN> )
+              | ( ( <STRTONUM> | <TOLOWER> | <TOUPPER> ) <LPAREN> Expression() <RPAREN> )
+              | ( <LENGTH> <LPAREN> (Expression())? <RPAREN> )
+              | ( <SPRINTF> <LPAREN> Expression() <COMMA> Expression() (EXPR_LIST())? <RPAREN> )
+              | ( <GENSUB> <LPAREN> Expression() <COMMA> Expression() <COMMA> Expression() (<COMMA> Expression())? <RPAREN> )
             }
 			
 			void Assignment() :
@@ -408,7 +461,10 @@ void E13() :
 {}
 {
 	 <IDENTIFIER> | <INTEGER> | <FLOAT> | <NUM_EXP> | <STRING> | Array() 
-   /*| <MATH_STATEMENTS> | <STRING_STATEMENTS> | <BUILT-IN>*/
+   | Math_Statements() | String_Statements() 
+   | <ARGC>| <ARGV>| <BINMODE>| <CONVFMT>| <ENVIRON>| <ERRNO>| <FIELDWIDTHS>
+   | <FILENAME>| <FNR>| <FS>| <IGNORECASE>| <LINT>| <NF>| <NR>| <OFMT>| <ORS>| <PROCINFO>
+   | <RS>| <RT>| <RSTART>| <RLENGTH>| <SUBSEP>| <TEXTDOMAIN>
 }
 
 void EXPR_LIST() :
