@@ -264,7 +264,7 @@ void javacc_input() :
       {}
       {
         (
-             <LBRACE> Action() <RBRACE> | Control_Statements()
+             <LBRACE> (Action())* <RBRACE> | Control_Statements()
             | ( IO_Statements() | Math_Statements() | String_Statements() | 
     			(( <IDENTIFIER> | Array() ) Assignment() )) <SEMICOLON>
         )
@@ -277,43 +277,34 @@ void javacc_input() :
               (<BREAK> | <CONTINUE> | <NEXT>) <SEMICOLON>
               | If_Statement() | While_Statement() | For_Statement() 
               | Delete_Statement() | Exit_Statement()
-              //| C2()
 
-            }
-
-            void C2() :
-            {}
-            {
-              If_Statement() | While_Statement() | For_Statement() 
             }
 
                   void If_Statement() : // PROBLEMA ???
                   {}
                   {
                       <IF> <LPAREN> Expression() <RPAREN> 
-                          <LBRACE> 
-                          (Statement())* 
-                          <RBRACE>
-                          ( <ELSE> <LBRACE> (Statement())* <RBRACE> )?
+                          //<LBRACE> 
+                          Statement()//(Statement())*
+                          //<RBRACE>
+                          //( <ELSE> <LBRACE> (Statement())* <RBRACE> )?
                   }
 
-                  void While_Statement() : // PROBLEMA ???
+                  void While_Statement() :
                   {}
                   {
                       <DO> Statement() <WHILE> <LPAREN> Expression() <RPAREN> <SEMICOLON>
-                    | <WHILE> <LPAREN> Expression() <RPAREN> 
-                              <LBRACE> (Statement())* <RBRACE>
+                    | <WHILE> <LPAREN> Expression() <RPAREN> Statement()
                   }
 
-                  void For_Statement() : // PROBLEMA ???
+                  void For_Statement() :
                   {}
                   {
                     <FOR> <LPAREN> (  LOOKAHEAD(2)
                                       ( Expression() <SEMICOLON> Expression() <SEMICOLON> Expression() )
                                     | ( <IDENTIFIER> <IN> <IDENTIFIER> )
                       )
-                    <RPAREN> 
-                    <LBRACE> (Statement())* <RBRACE>
+                    <RPAREN> Statement()
                   }
 
                   void Delete_Statement() :
