@@ -16,7 +16,7 @@ class AWK implements AWKConstants {
         String location = "@(" + t.beginLine + ", " + t.beginColumn + ")";
         // Imprime as informações do token. Se for EOF não imprime image, pois ela não existe.
         if(t.kind == EOF)
-            System.out.println(String.format("%-15s %-20s <EOL>", location, nomeToken));
+            System.out.println(String.format("%-15s %-20s <EOF>", location, nomeToken));
         else
             System.out.println(String.format("%-15s %-20s %s", location, nomeToken, t.image));
     } while (!(nomeToken.equals("<EOF>"))); // Termina o loop se EOF
@@ -122,29 +122,7 @@ void javacc_input() throws ParseException {
   }
 
   final public void Action() throws ParseException {
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case LBRACE:{
-      Statement02();
-      break;
-      }
-    case IF:
-    case BREAK:
-    case CONTINUE:
-    case NEXT:
-    case GETLINE:
-    case PRINT:
-    case ATAN2:
-    case ASSORT:
-    case LBRACKET:
-    case IDENTIFIER:{
-      Statement();
-      break;
-      }
-    default:
-      jj_la1[2] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
-    }
+    Statement02();
   }
 
   final public void Statement02() throws ParseException {
@@ -168,7 +146,7 @@ void javacc_input() throws ParseException {
           break;
           }
         default:
-          jj_la1[3] = jj_gen;
+          jj_la1[2] = jj_gen;
           break label_3;
         }
         Statement();
@@ -180,7 +158,7 @@ void javacc_input() throws ParseException {
         break;
         }
       default:
-        jj_la1[4] = jj_gen;
+        jj_la1[3] = jj_gen;
         break label_2;
       }
     }
@@ -227,7 +205,7 @@ void javacc_input() throws ParseException {
           break;
           }
         default:
-          jj_la1[5] = jj_gen;
+          jj_la1[4] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -235,7 +213,7 @@ void javacc_input() throws ParseException {
         break;
         }
       default:
-        jj_la1[6] = jj_gen;
+        jj_la1[5] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -243,7 +221,7 @@ void javacc_input() throws ParseException {
       break;
       }
     default:
-      jj_la1[7] = jj_gen;
+      jj_la1[6] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -268,7 +246,7 @@ void javacc_input() throws ParseException {
         break;
         }
       default:
-        jj_la1[8] = jj_gen;
+        jj_la1[7] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -280,7 +258,7 @@ void javacc_input() throws ParseException {
       break;
       }
     default:
-      jj_la1[9] = jj_gen;
+      jj_la1[8] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -299,16 +277,35 @@ void javacc_input() throws ParseException {
       break;
       }
     default:
-      jj_la1[10] = jj_gen;
+      jj_la1[9] = jj_gen;
       ;
     }
-    jj_consume_token(SEMICOLON);
   }
 
   final public void IO_Statements() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case PRINT:{
       jj_consume_token(PRINT);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case LBRACKET:
+      case LPAREN:
+      case REFERENCE:
+      case CREMENT_OP:
+      case PLUS:
+      case MINUS:
+      case NEGATION:
+      case IDENTIFIER:
+      case INTEGER:
+      case FLOAT:
+      case NUM_EXP:
+      case STRING:{
+        Expression();
+        break;
+        }
+      default:
+        jj_la1[10] = jj_gen;
+        ;
+      }
       break;
       }
     case GETLINE:{
@@ -953,16 +950,16 @@ void Expression() throws ParseException {
       jj_la1_init_3();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x0,0x0,0x8073840,0x8073840,0x0,0x0,0x8070000,0x8073840,0x3800,0x3840,0x80,0x30000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_0 = new int[] {0x0,0x0,0x8073840,0x0,0x0,0x8070000,0x8073840,0x3800,0x3840,0x80,0x0,0x30000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
       jj_la1_1 = new int[] {0x600,0x600,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0xf0076810,0xf0076810,0x10000014,0x10000010,0x4,0x10000010,0x10000010,0x10000010,0x0,0x0,0x0,0x0,0x4000000,0x2000000,0x1000000,0x800000,0x400000,0xf0076810,0x30000,0x380000,0x380000,0x70000,0x70000,0x8000,0x4000,0xf0002810,0x2000,0xf0000810,0xf0000010,0x80,};
+      jj_la1_2 = new int[] {0xf0076810,0xf0076810,0x10000010,0x4,0x10000010,0x10000010,0x10000010,0x0,0x0,0x0,0xf0076810,0x0,0x4000000,0x2000000,0x1000000,0x800000,0x400000,0xf0076810,0x30000,0x380000,0x380000,0x70000,0x70000,0x8000,0x4000,0xf0002810,0x2000,0xf0000810,0xf0000010,0x80,};
    }
    private static void jj_la1_init_3() {
-      jj_la1_3 = new int[] {0x1,0x1,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x1,0x1,0x0,};
+      jj_la1_3 = new int[] {0x1,0x1,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x1,0x1,0x0,};
    }
   final private JJCalls[] jj_2_rtns = new JJCalls[2];
   private boolean jj_rescan = false;

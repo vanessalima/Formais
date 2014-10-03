@@ -44,7 +44,7 @@ class AWK {
         String location = "@(" + t.beginLine + ", " + t.beginColumn + ")";
         // Imprime as informações do token. Se for EOF não imprime image, pois ela não existe.
         if(t.kind == EOF)
-            System.out.println(String.format("%-15s %-20s <EOL>", location, nomeToken));
+            System.out.println(String.format("%-15s %-20s <EOF>", location, nomeToken));
         else
             System.out.println(String.format("%-15s %-20s %s", location, nomeToken, t.image));
     } while (!(nomeToken.equals("<EOF>"))); // Termina o loop se EOF
@@ -217,7 +217,7 @@ TOKEN : {
               TERMINAIS
 *****************************************/
 TOKEN : {
-    < IDENTIFIER : ( ["a"-"z", "A"-"Z", "_"] ) ( ["a"-"z", "A"-"Z", "_"] | ["0"-"9"] )* > 
+    < IDENTIFIER : ( ~["0"-"9"] ["a"-"z", "A"-"Z", "_"] ) ( ["a"-"z", "A"-"Z", "_"] | ["0"-"9"] )* > 
   | < INTEGER : ( <PLUS> | <MINUS> )? ["0"-"9"] (["0"-"9"] | "_")* >
   | < FLOAT   : <INTEGER> <DOT> ["0"-"9"] (["0"-"9"] | "_")* >
   | < NUM_EXP : (<INTEGER> | <FLOAT>) ("E" | "e") <INTEGER> >
@@ -252,7 +252,7 @@ void javacc_input() :
       void Action() :
       {}
       {
-        Statement02() | Statement()
+        Statement02()// | (Statement())*
       }
 
       void Statement02() :
@@ -280,13 +280,13 @@ void javacc_input() :
                   void If_Statement() :
                   {}
                   {
-                      <IF> <LPAREN> Expression() <RPAREN> Action() (<ELSE> Action())? <SEMICOLON>
+                      <IF> <LPAREN> Expression() <RPAREN> Action() (<ELSE> Action())?
                   }
 
             void IO_Statements() :
             {}
             {
-              <PRINT> | <GETLINE>
+              <PRINT> ( Expression() )? | <GETLINE>
             }
 
             void Math_Statements() :
