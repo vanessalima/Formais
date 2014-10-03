@@ -39,91 +39,159 @@ public interface AWKConstants {
   /** RegularExpression Id. */
   int RAND = 19;
   /** RegularExpression Id. */
-  int ASSORT = 20;
+  int COS = 20;
   /** RegularExpression Id. */
-  int ASSORTL = 21;
+  int EXP = 21;
   /** RegularExpression Id. */
-  int BEGIN = 22;
+  int INT = 22;
   /** RegularExpression Id. */
-  int END = 23;
+  int LOG = 23;
   /** RegularExpression Id. */
-  int ARGC = 24;
+  int SIN = 24;
   /** RegularExpression Id. */
-  int ARGV = 25;
+  int SQRT = 25;
   /** RegularExpression Id. */
-  int LBRACE = 26;
+  int SRAND = 26;
   /** RegularExpression Id. */
-  int RBRACE = 27;
+  int ASSORT = 27;
   /** RegularExpression Id. */
-  int LBRACKET = 28;
+  int ASSORTI = 28;
   /** RegularExpression Id. */
-  int RBRACKET = 29;
+  int GENSUB = 29;
   /** RegularExpression Id. */
-  int SEMICOLON = 30;
+  int GSUB = 30;
   /** RegularExpression Id. */
-  int COMMA = 31;
+  int INDEX = 31;
   /** RegularExpression Id. */
-  int DOT = 32;
+  int LENGTH = 32;
   /** RegularExpression Id. */
-  int QUOTE = 33;
+  int MATCH = 33;
   /** RegularExpression Id. */
-  int COLON = 34;
+  int SPLIT = 34;
   /** RegularExpression Id. */
-  int LPAREN = 35;
+  int SPRINTF = 35;
   /** RegularExpression Id. */
-  int RPAREN = 36;
+  int STRTONUM = 36;
   /** RegularExpression Id. */
-  int REFERENCE = 37;
+  int SUB = 37;
   /** RegularExpression Id. */
-  int CREMENT_OP = 38;
+  int SUBSTR = 38;
   /** RegularExpression Id. */
-  int EXPONENTIATION = 39;
+  int TOLOWER = 39;
   /** RegularExpression Id. */
-  int PLUS = 40;
+  int TOUPPER = 40;
   /** RegularExpression Id. */
-  int MINUS = 41;
+  int BEGIN = 41;
   /** RegularExpression Id. */
-  int NEGATION = 42;
+  int END = 42;
   /** RegularExpression Id. */
-  int MULTIPLICATION = 43;
+  int ARGC = 43;
   /** RegularExpression Id. */
-  int DIVISION = 44;
+  int ARGV = 44;
   /** RegularExpression Id. */
-  int MODULUS = 45;
+  int BINMODE = 45;
   /** RegularExpression Id. */
-  int PIPED = 46;
+  int CONVFMT = 46;
   /** RegularExpression Id. */
-  int PIPED_AND = 47;
+  int ENVIRON = 47;
   /** RegularExpression Id. */
-  int RELATIONAL_OP = 48;
+  int ERRNO = 48;
   /** RegularExpression Id. */
-  int IN = 49;
+  int FIELDWIDTHS = 49;
   /** RegularExpression Id. */
-  int AND = 50;
+  int FILENAME = 50;
   /** RegularExpression Id. */
-  int OR = 51;
+  int FNR = 51;
   /** RegularExpression Id. */
-  int QMARK = 52;
+  int FS = 52;
   /** RegularExpression Id. */
-  int ASSIGNMENT_OP = 53;
+  int IGNORECASE = 53;
   /** RegularExpression Id. */
-  int IDENTIFIER = 54;
+  int LINT = 54;
   /** RegularExpression Id. */
-  int INTEGER = 55;
+  int NF = 55;
   /** RegularExpression Id. */
-  int FLOAT = 56;
+  int NR = 56;
   /** RegularExpression Id. */
-  int EXP = 57;
+  int OFMT = 57;
   /** RegularExpression Id. */
-  int BIN_NUMBER = 58;
+  int ORS = 58;
   /** RegularExpression Id. */
-  int OCT_NUMBER = 59;
+  int PROCINFO = 59;
   /** RegularExpression Id. */
-  int DEC_NUMBER = 60;
+  int RS = 60;
   /** RegularExpression Id. */
-  int HEX_NUMBER = 61;
+  int RT = 61;
   /** RegularExpression Id. */
-  int STRING = 62;
+  int RSTART = 62;
+  /** RegularExpression Id. */
+  int RLENGTH = 63;
+  /** RegularExpression Id. */
+  int SUBSEP = 64;
+  /** RegularExpression Id. */
+  int TEXTDOMAIN = 65;
+  /** RegularExpression Id. */
+  int LBRACE = 66;
+  /** RegularExpression Id. */
+  int RBRACE = 67;
+  /** RegularExpression Id. */
+  int LBRACKET = 68;
+  /** RegularExpression Id. */
+  int RBRACKET = 69;
+  /** RegularExpression Id. */
+  int SEMICOLON = 70;
+  /** RegularExpression Id. */
+  int COMMA = 71;
+  /** RegularExpression Id. */
+  int DOT = 72;
+  /** RegularExpression Id. */
+  int QUOTE = 73;
+  /** RegularExpression Id. */
+  int COLON = 74;
+  /** RegularExpression Id. */
+  int LPAREN = 75;
+  /** RegularExpression Id. */
+  int RPAREN = 76;
+  /** RegularExpression Id. */
+  int REFERENCE = 77;
+  /** RegularExpression Id. */
+  int CREMENT_OP = 78;
+  /** RegularExpression Id. */
+  int EXPONENTIATION = 79;
+  /** RegularExpression Id. */
+  int PLUS = 80;
+  /** RegularExpression Id. */
+  int MINUS = 81;
+  /** RegularExpression Id. */
+  int NEGATION = 82;
+  /** RegularExpression Id. */
+  int MULTIPLICATION = 83;
+  /** RegularExpression Id. */
+  int DIVISION = 84;
+  /** RegularExpression Id. */
+  int MODULUS = 85;
+  /** RegularExpression Id. */
+  int RELATIONAL_OP = 86;
+  /** RegularExpression Id. */
+  int IN = 87;
+  /** RegularExpression Id. */
+  int AND = 88;
+  /** RegularExpression Id. */
+  int OR = 89;
+  /** RegularExpression Id. */
+  int QMARK = 90;
+  /** RegularExpression Id. */
+  int ASSIGNMENT_OP = 91;
+  /** RegularExpression Id. */
+  int IDENTIFIER = 92;
+  /** RegularExpression Id. */
+  int INTEGER = 93;
+  /** RegularExpression Id. */
+  int FLOAT = 94;
+  /** RegularExpression Id. */
+  int NUM_EXP = 95;
+  /** RegularExpression Id. */
+  int STRING = 96;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -150,12 +218,52 @@ public interface AWKConstants {
     "\"print\"",
     "\"atan2\"",
     "\"rand\"",
+    "\"cos\"",
+    "\"exp\"",
+    "\"int\"",
+    "\"log\"",
+    "\"sin\"",
+    "\"sqrt\"",
+    "\"srand\"",
     "\"assort\"",
-    "\"assortl\"",
+    "\"assorti\"",
+    "\"gensub\"",
+    "\"gsub\"",
+    "\"index\"",
+    "\"length\"",
+    "\"match\"",
+    "\"split\"",
+    "\"sprintf\"",
+    "\"strtonum\"",
+    "\"sub\"",
+    "\"substr\"",
+    "\"tolower\"",
+    "\"toupper\"",
     "\"BEGIN\"",
     "\"END\"",
     "\"ARGC\"",
     "\"ARGV\"",
+    "\"BINMODE\"",
+    "\"CONVFMT\"",
+    "\"ENVIRON\"",
+    "\"ERRNO\"",
+    "\"FIELDWIDTHS\"",
+    "\"FILENAME\"",
+    "\"FNR\"",
+    "\"FS\"",
+    "\"IGNORECASE\"",
+    "\"LINT\"",
+    "\"NF\"",
+    "\"NR\"",
+    "\"OFMT\"",
+    "\"ORS\"",
+    "\"PROCINFO\"",
+    "\"RS\"",
+    "\"RT\"",
+    "\"RSTART\"",
+    "\"RLENGTH\"",
+    "\"SUBSEP\"",
+    "\"TEXTDOMAIN\"",
     "\"{\"",
     "\"}\"",
     "\"[\"",
@@ -176,8 +284,6 @@ public interface AWKConstants {
     "\"*\"",
     "\"/\"",
     "\"%\"",
-    "\"|\"",
-    "\"|&\"",
     "<RELATIONAL_OP>",
     "\"in\"",
     "\"&&\"",
@@ -187,11 +293,7 @@ public interface AWKConstants {
     "<IDENTIFIER>",
     "<INTEGER>",
     "<FLOAT>",
-    "<EXP>",
-    "<BIN_NUMBER>",
-    "<OCT_NUMBER>",
-    "<DEC_NUMBER>",
-    "<HEX_NUMBER>",
+    "<NUM_EXP>",
     "<STRING>",
   };
 

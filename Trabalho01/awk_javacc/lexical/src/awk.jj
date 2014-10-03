@@ -55,10 +55,18 @@ class AWK {
   public static void main(String args[]) {
     try
     {
-      // Define o analisador sintatico de acordo com a entrada do sistema
+      // Define o analisador léxico de acordo com a entrada do sistema
+      AWK analisadorLexico = new AWK(System.in);
+      // Roda o loop de processamento enquanto não encontrar EOF
+      analisadorLexico.processa();
+
+      // Define o analisador sintático de acordo com a entrada do sistema
       AWK analisadorSintatico = new AWK(System.in);
-      analisadorSintatico.javacc_input();
-      System.out.println("SUCESSO!");
+      // Roda o loop de processamento enquanto não encontrar EOF
+      //analisadorSintatico.javacc_input();
+      
+      // Processo Finalizado
+      System.out.println("Analisado com sucesso!");
     }
     catch(ParseException e)
     {
@@ -81,7 +89,7 @@ SKIP : { " " | "\t" | "\r" | "\n" }
 
 /* Skip Comentários de linha e de bloco */
 SKIP : {
-  <COMENTARIO : "#" (~["\n","\r"])*  >
+  <COMENTARIO : "#" (~["\n","\r"])* >
 }
 
 /*****************************************
@@ -212,7 +220,7 @@ TOKEN : {
     < IDENTIFIER : ( ["a"-"z", "A"-"Z", "_"] ) ( ["a"-"z", "A"-"Z", "_"] | ["0"-"9"] )* > 
   | < INTEGER : ( <PLUS> | <MINUS> )? ["0"-"9"] (["0"-"9"] | "_")* >
   | < FLOAT   : <INTEGER> <DOT> ["0"-"9"] (["0"-"9"] | "_")* >
-  | < EXP     : (<INTEGER> | <FLOAT>) ("E" | "e") <INTEGER> >
+  | < NUM_EXP : (<INTEGER> | <FLOAT>) ("E" | "e") <INTEGER> >
 }
 
 
@@ -222,179 +230,3 @@ TOKEN : {
 TOKEN : {
   <STRING : (<QUOTE> (~["\""])* <QUOTE>) >
 }
-
-/*******************************************************
-                AWK SIMPLIFIED GRAMMAR
-*******************************************************/
-
-void javacc_input() :
-{}
-{
-    
-      ( Pattern() <LBRACE> Action() <RBRACE> )*
-      <EOF>
-}
-
-      void Pattern() :
-      {}
-      {
-        <BEGIN> | <END> | Expression() 
-      }
-
-      void Action() :
-      {}
-      {
-        <LBRACE> (Statement())* <RBRACE> | (Statement())*
-      }
-
-      void Statement() :
-      {}
-      {
-          Control_Statements()
-        | ( IO_Statements() | Math_Statements() | String_Statements() | 
-			(( <IDENTIFIER> | Array() ) Assignment() )) <SEMICOLON>
-      }
-
-
-            void Control_Statements() :
-            {}
-            {
-              <BREAK> | <CONTINUE> | <NEXT> 
-            }
-
-            void IO_Statements() :
-            {}
-            {
-              <PRINT> | <GETLINE>
-            }
-
-            void Math_Statements() :
-            {}
-            {
-              <ATAN2>
-            }
-
-            void String_Statements() :
-            {}
-            {
-              <ASSORT>
-            }
-			
-			void Assignment() :
-			{}
-			{
-				<ASSIGNMENT_OP> Expression()
-			}
-
-/*****************************************
-        MANIPULAÇÃO DE VARIAVEIS
-*****************************************/
-void Array() :
-{}
-{
-  <LBRACKET> Expression() /*  */ <RBRACKET> 
-}
-
-/************************************************************
-                      EXPRESSÕES
-************************************************************/
-
-void Expression() :
-{}
-{
-  Expression00()
-}
-
-void Expression00() :
-{}
-{
-	E01() ( <QMARK> E01() <COLON> E01() )* 
-  //<STRING> | (<LPAREN> Expression() <RPAREN>) | <IDENTIFIER>
-}
-
-void E01() :
-{}
-{
-	 E02() ( <OR> E02() )*
-}
-
-void E02() :
-{}
-{
-	E03() ( <AND> E03() )*
-}
-
-void E03() :
-{}
-{
-	E04() ( <IN> E04() )*
-}
-
-void E04() :
-{}
-{
-	E05() ( <RELATIONAL_OP> E05() )*
-}
-
-void E05() :
-{}
-{
-	E06() ( E06() )*
-}
-
-void E06() :
-{}
-{
-	E07() ( <PLUS> E07() | <MINUS> E07() )* 
-}
-
-void E07() :
-{}
-{
-	E08() ( <MULTIPLICATION> E08() | <DIVISION> E08() | <MODULUS> E08() )*
-}
-
-void E08() :
-{}
-{
-	( <PLUS> | <MINUS> | <NEGATION> )? E09()
-}
-
-void E09() :
-{}
-{
-	E10() ( <EXPONENTIATION> E10() )*
-}
-
-void E10() :
-{}
-{
-	((<CREMENT_OP>) E11()) | (E11() (<CREMENT_OP>)) | E11()
-}
-
-void E11() :
-{}
-{
-	("$"E12()) | E12()
-}
-
-void E12() :
-{}
-{
-	("("E13()")") | E13()
-}
-
-void E13() :
-{}
-{
-	 <ID> | <NUMBER> | <STRING> | <ARRAY> | <MATH_STATEMENTS> | <STRING_STATEMENTS> | <BUILT-IN>
-
-}
-
-void EXPR-LIST() :
-{}
-{
-	( "," Expression00() ) | ( "," Expression00() EXPR-LIST() )
-	<STRING> | (<LPAREN> Expression() <RPAREN>) | <IDENTIFIER>
-}
-

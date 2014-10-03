@@ -1,0 +1,44 @@
+/***********************************************************************
+            ANALISADOR LÉXICO E SINTÁTICO
+************************************************************************
+
+Integrantes: 
+  Carlos Rafael Barbosa Leite	7656596
+  Vanessa Apolinário Lima		7239256
+  Vitor Barbosa Novello			7656425 
+
+Documento:
+  Codigo fonte
+
+Nome:
+  Gramática AWK - Analisador Léxico e Sintático
+
+************************************************************************/
+
+Para iniciar a compilação do parser AWK, é necessário gerar os arquivos java’s a partir do léxico e gramática descritos no arquivo .jj. Para isso, basta instalar o javacc em seu computador, e então executar a linha de comando:
+
+		javacc awk.jj
+
+	Após isso, os arquivos java’s serão criados, estes arquivos devem ser compilados pelo java em um único programa, sendo possível fazer isso com a linha de comando:
+	
+		javac *.java
+
+	Para utilizar o parser, deve-se usar o comando:
+		
+		java AWK < Nome_do_Arquivo
+
+	Ou então, apenas execute:
+		
+		java AWK
+
+	E teste o programa digitando o código.
+
+
+
+ALTERNATIVA PARA NÃO INSTALAR O JAVACC
+	
+	Caso não deseje instalar o javacc, é possível fazer o download do arquivo jar do javacc, e dessa forma, substituir o primeiro comando pela linha:
+
+		java -cp javacc.jar javacc awk.jj
+
+	E siga o restante dos passos anteriores.
