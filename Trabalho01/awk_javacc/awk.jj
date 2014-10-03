@@ -283,11 +283,9 @@ void javacc_input() :
                   void If_Statement() : // PROBLEMA ???
                   {}
                   {
-                      <IF> <LPAREN> Expression() <RPAREN> 
-                          //<LBRACE> 
-                          Statement()//(Statement())*
-                          //<RBRACE>
-                          //( <ELSE> <LBRACE> (Statement())* <RBRACE> )?
+                      LOOKAHEAD(6)
+                        ( <IF> <LPAREN> Expression() <RPAREN> Statement() <ELSE> Statement() )
+                      | ( <IF> <LPAREN> Expression() <RPAREN> Statement() )
                   }
 
                   void While_Statement() :
