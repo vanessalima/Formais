@@ -265,8 +265,8 @@ void javacc_input() :
       {
         (
              <LBRACE> (Action())* <RBRACE> | Control_Statements()
-            | ( IO_Statements() | Math_Statements() | String_Statements() | 
-    			(( <IDENTIFIER> | Array() ) Assignment() )) <SEMICOLON>
+            | ( IO_Statements() | Math_Statements() | String_Statements() 
+            | (( <IDENTIFIER> (Array())? ) Assignment() )) <SEMICOLON>
         )
       }
 
@@ -280,7 +280,7 @@ void javacc_input() :
 
             }
 
-                  void If_Statement() : // PROBLEMA ???
+                  void If_Statement() :
                   {}
                   {
                       LOOKAHEAD(6)
@@ -320,7 +320,7 @@ void javacc_input() :
             void IO_Statements() :
             {}
             {
-              <PRINT> ( Expression() (EXPR_LIST())? )? | <GETLINE> (Expression())?
+              <PRINT> ( Expression() EXPR_LIST() )? | <GETLINE> (Expression())?
             }
 
             void Math_Statements() :
@@ -339,7 +339,7 @@ void javacc_input() :
               | ( ( <GSUB> | <MATCH> | <SPLIT> | <SUB> | <SUBSTR> ) <LPAREN> Expression() <COMMA> Expression() (<COMMA> Expression())? <RPAREN> )
               | ( ( <STRTONUM> | <TOLOWER> | <TOUPPER> ) <LPAREN> Expression() <RPAREN> )
               | ( <LENGTH> <LPAREN> (Expression())? <RPAREN> )
-              | ( <SPRINTF> <LPAREN> Expression() <COMMA> Expression() (EXPR_LIST())? <RPAREN> )
+              | ( <SPRINTF> <LPAREN> Expression() <COMMA> Expression() EXPR_LIST() <RPAREN> )
               | ( <GENSUB> <LPAREN> Expression() <COMMA> Expression() <COMMA> Expression() (<COMMA> Expression())? <RPAREN> )
             }
 			
@@ -355,7 +355,7 @@ void javacc_input() :
 void Array() :
 {}
 {
-  <LBRACKET> Expression() /*  */ <RBRACKET> 
+  <LBRACKET> Expression() EXPR_LIST() <RBRACKET> 
 }
 
 /************************************************************
@@ -431,7 +431,8 @@ void E09() :
 void E10() :
 {}
 {
-  ((<CREMENT_OP>) E11()) | LOOKAHEAD(2) (E11() (<CREMENT_OP>) ) | E11()
+  LOOKAHEAD(3)
+  ((<CREMENT_OP>)? E11()) | (E11() <CREMENT_OP> )
 }
 
 void E11() :
@@ -449,7 +450,8 @@ void E12() :
 void E13() :
 {}
 {
-	 <IDENTIFIER> | <INTEGER> | <FLOAT> | <NUM_EXP> | <STRING> | Array() 
+	  LOOKAHEAD(2) <IDENTIFIER> Array() | <IDENTIFIER> | Array() 
+   | <INTEGER> | <FLOAT> | <NUM_EXP> | <STRING>
    | Math_Statements() | String_Statements() 
    | <ARGC>| <ARGV>| <BINMODE>| <CONVFMT>| <ENVIRON>| <ERRNO>| <FIELDWIDTHS>
    | <FILENAME>| <FNR>| <FS>| <IGNORECASE>| <LINT>| <NF>| <NR>| <OFMT>| <ORS>| <PROCINFO>
@@ -459,6 +461,6 @@ void E13() :
 void EXPR_LIST() :
 {}
 {
-	( "," Expression00() )+
+	( "," Expression00() )*
 }
 
