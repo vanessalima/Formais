@@ -1,0 +1,400 @@
+/***********************************************************************
+            ANALISADOR LÉXICO E SINTÁTICO
+************************************************************************
+
+Integrantes: 
+  Carlos Rafael Barbosa Leite	7656596
+  Vanessa Apolinário Lima		7239256
+  Vitor Barbosa Novello			7656425 
+
+Documento:
+  Codigo fonte
+
+Nome:
+  Gramática AWK - Analisador Léxico e Sintático
+
+************************************************************************/
+
+/*****************************************
+                Opções
+*****************************************/
+options {
+  STATIC = false;
+  DEBUG_LOOKAHEAD = false;
+}
+
+/*****************************************
+    Inicialização do Analisador Léxico
+*****************************************/
+PARSER_BEGIN(AWK)
+
+/* AWK Parser */
+class AWK {
+
+  // Processa o código e gera a tabela de tokens
+  public void processa() throws ParseException, TokenMgrError{
+    Token t;
+    String nomeToken;
+    do {
+        // Pega o próximo token gerado pelo Léxico.
+        t = getNextToken();
+        // Pega o proximo token do tipo t.kind
+        nomeToken = tokenImage[t.kind];
+        // Seta a localização do token
+        String location = "@(" + t.beginLine + ", " + t.beginColumn + ")";
+        // Imprime as informações do token. Se for EOF não imprime image, pois ela não existe.
+        if(t.kind == EOF)
+            System.out.println(String.format("%-15s %-20s <EOL>", location, nomeToken));
+        else
+            System.out.println(String.format("%-15s %-20s %s", location, nomeToken, t.image));
+    } while (!(nomeToken.equals("<EOF>"))); // Termina o loop se EOF
+    System.out.println(String.format("%s", t.image));
+  }
+
+  /* Main entry point. */
+  public static void main(String args[]) {
+    try
+    {
+      // Define o analisador sintatico de acordo com a entrada do sistema
+      AWK analisadorSintatico = new AWK(System.in);
+      analisadorSintatico.javacc_input();
+      System.out.println("SUCESSO!");
+    }
+    catch(ParseException e)
+    {
+      System.out.println(e.getMessage());
+        System.out.println("Ocorreu uma excecao!");
+    }
+    catch(TokenMgrError e)
+    {
+        System.out.println(e.getMessage());
+        System.out.println("Existem erros no codigo! Por favor, verifica-los.");
+    }
+  }
+}
+PARSER_END(AWK)
+
+/*****************************************
+                SKIP
+*****************************************/
+SKIP : { " " | "\t" | "\r" | "\n" }
+
+/* Skip Comentários de linha e de bloco */
+SKIP : {
+  <COMENTARIO : "#" (~["\n","\r"])*  >
+}
+
+/*****************************************
+          PALAVRAS RERSERVADAS
+*****************************************/
+/* Control Statements */
+TOKEN : {
+    <IF : "if">
+  | <ELSE : "else">
+  | <WHILE : "while">
+  | <DO : "do">
+  | <FOR : "for">
+  | <BREAK : "break">
+  | <CONTINUE : "continue">
+  | <NEXT : "next">
+  | <DELETE : "delete">
+  | <EXIT : "exit">
+}
+
+/* I/O Statements */
+TOKEN : {
+    <GETLINE : "getline">
+  | <PRINT : "print">
+}
+
+/* Math Statements */
+TOKEN : {
+    <ATAN2 : "atan2">
+  | <RAND : "rand">
+  | <COS : "cos">
+  | <EXP : "exp">
+  | <INT : "int">
+  | <LOG : "log">
+  | <SIN : "sin">
+  | <SQRT : "sqrt">
+  | <SRAND : "srand">
+}
+
+/* String Statements */
+TOKEN : {
+    <ASSORT : "assort">
+  | <ASSORTI : "assorti">
+  | <GENSUB : "gensub">
+  | <GSUB : "gsub">
+  | <INDEX : "index">
+  | <LENGTH : "length">
+  | <MATCH : "match">
+  | <SPLIT : "split">
+  | <SPRINTF : "sprintf">
+  | <STRTONUM : "strtonum">
+  | <SUB : "sub">
+  | <SUBSTR : "substr">
+  | <TOLOWER : "tolower">
+  | <TOUPPER : "toupper">
+}
+
+/* Built-in */
+TOKEN : {
+    <BEGIN : "BEGIN">
+  | <END : "END">
+  | <ARGC : "ARGC">
+  | <ARGV : "ARGV">
+  | <BINMODE : "BINMODE">
+  | <CONVFMT : "CONVFMT">
+  | <ENVIRON : "ENVIRON">
+  | <ERRNO : "ERRNO">
+  | <FIELDWIDTHS : "FIELDWIDTHS">
+  | <FILENAME : "FILENAME">
+  | <FNR : "FNR">
+  | <FS : "FS">
+  | <IGNORECASE : "IGNORECASE">
+  | <LINT : "LINT">
+  | <NF : "NF">
+  | <NR : "NR">
+  | <OFMT : "OFMT">
+  | <ORS : "ORS">
+  | <PROCINFO : "PROCINFO">
+  | <RS : "RS">
+  | <RT : "RT">
+  | <RSTART : "RSTART">
+  | <RLENGTH : "RLENGTH">
+  | <SUBSEP : "SUBSEP">
+  | <TEXTDOMAIN : "TEXTDOMAIN">
+}
+
+/*****************************************
+              SEPARADORES
+*****************************************/
+TOKEN : {  
+    <LBRACE: "{" >
+  | <RBRACE: "}" >
+  | <LBRACKET: "[" >
+  | <RBRACKET: "]" >
+  | <SEMICOLON: ";" >
+  | <COMMA: "," >
+  | <DOT: "." >
+  | <QUOTE: "\"">
+  | <COLON : ":">
+}
+
+/*****************************************
+              OPERADORES
+*****************************************/
+TOKEN : {
+    <LPAREN: "(" >
+  | <RPAREN: ")" >
+  | <REFERENCE : "$">
+  | <CREMENT_OP : "++" | "--">
+  | <EXPONENTIATION : "^">
+  | <PLUS: "+" >
+  | <MINUS: "-" >
+  | <NEGATION : "!">
+  | <MULTIPLICATION: "*" >
+  | <DIVISION: "/" >
+  | <MODULUS : "%">
+  | <RELATIONAL_OP : ">" | "<" | "<=" | ">=" | "!=" | "==">
+  | <IN : "in">
+  | <AND : "&&">
+  | <OR : "||"> 
+  | <QMARK : "?">
+  | <ASSIGNMENT_OP : "=" | "+=" | "-=" | "*=" | "/=" | "%=" | "^=">
+}
+
+/*****************************************
+              TERMINAIS
+*****************************************/
+TOKEN : {
+    < IDENTIFIER : ( ["a"-"z", "A"-"Z", "_"] ) ( ["a"-"z", "A"-"Z", "_"] | ["0"-"9"] )* > 
+  | < INTEGER : ( <PLUS> | <MINUS> )? ["0"-"9"] (["0"-"9"] | "_")* >
+  | < FLOAT   : <INTEGER> <DOT> ["0"-"9"] (["0"-"9"] | "_")* >
+  | < EXP     : (<INTEGER> | <FLOAT>) ("E" | "e") <INTEGER> >
+}
+
+
+/*****************************************
+        MANIPULAÇÃO DE VARIAVEIS
+*****************************************/
+TOKEN : {
+  <STRING : (<QUOTE> (~["\""])* <QUOTE>) >
+}
+
+/*******************************************************
+                AWK SIMPLIFIED GRAMMAR
+*******************************************************/
+
+void javacc_input() :
+{}
+{
+    
+      ( Pattern() <LBRACE> Action() <RBRACE> )*
+      <EOF>
+}
+
+      void Pattern() :
+      {}
+      {
+        <BEGIN> | <END> | Expression() 
+      }
+
+      void Action() :
+      {}
+      {
+        <LBRACE> (Statement())* <RBRACE> | (Statement())*
+      }
+
+      void Statement() :
+      {}
+      {
+          Control_Statements()
+        | ( IO_Statements() | Math_Statements() | String_Statements() | 
+			(( <IDENTIFIER> | Array() ) Assignment() )) <SEMICOLON>
+      }
+
+
+            void Control_Statements() :
+            {}
+            {
+              <BREAK> | <CONTINUE> | <NEXT> 
+            }
+
+            void IO_Statements() :
+            {}
+            {
+              <PRINT> | <GETLINE>
+            }
+
+            void Math_Statements() :
+            {}
+            {
+              <ATAN2>
+            }
+
+            void String_Statements() :
+            {}
+            {
+              <ASSORT>
+            }
+			
+			void Assignment() :
+			{}
+			{
+				<ASSIGNMENT_OP> Expression()
+			}
+
+/*****************************************
+        MANIPULAÇÃO DE VARIAVEIS
+*****************************************/
+void Array() :
+{}
+{
+  <LBRACKET> Expression() /*  */ <RBRACKET> 
+}
+
+/************************************************************
+                      EXPRESSÕES
+************************************************************/
+
+void Expression() :
+{}
+{
+  Expression00()
+}
+
+void Expression00() :
+{}
+{
+	E01() ( <QMARK> E01() <COLON> E01() )* 
+  //<STRING> | (<LPAREN> Expression() <RPAREN>) | <IDENTIFIER>
+}
+
+void E01() :
+{}
+{
+	 E02() ( <OR> E02() )*
+}
+
+void E02() :
+{}
+{
+	E03() ( <AND> E03() )*
+}
+
+void E03() :
+{}
+{
+	E04() ( <IN> E04() )*
+}
+
+void E04() :
+{}
+{
+	E05() ( <RELATIONAL_OP> E05() )*
+}
+
+void E05() :
+{}
+{
+	E06() ( E06() )*
+}
+
+void E06() :
+{}
+{
+	E07() ( <PLUS> E07() | <MINUS> E07() )* 
+}
+
+void E07() :
+{}
+{
+	E08() ( <MULTIPLICATION> E08() | <DIVISION> E08() | <MODULUS> E08() )*
+}
+
+void E08() :
+{}
+{
+	( <PLUS> | <MINUS> | <NEGATION> )? E09()
+}
+
+void E09() :
+{}
+{
+	E10() ( <EXPONENTIATION> E10() )*
+}
+
+void E10() :
+{}
+{
+	((<CREMENT_OP>) E11()) | (E11() (<CREMENT_OP>)) | E11()
+}
+
+void E11() :
+{}
+{
+	("$"E12()) | E12()
+}
+
+void E12() :
+{}
+{
+	("("E13()")") | E13()
+}
+
+void E13() :
+{}
+{
+	 <ID> | <NUMBER> | <STRING> | <ARRAY> | <MATH_STATEMENTS> | <STRING_STATEMENTS> | <BUILT-IN>
+
+}
+
+void EXPR-LIST() :
+{}
+{
+	( "," Expression00() ) | ( "," Expression00() EXPR-LIST() )
+	<STRING> | (<LPAREN> Expression() <RPAREN>) | <IDENTIFIER>
+}
+
